@@ -85,13 +85,13 @@
   ~~~swift
   // 관리자 모드에서 사용하는 로직
   protocol ManagerModeDelegate {
-      func add(productIndex: Int) throws
-    	func deleteInventory(index: Int) throws
+    func add(productIndex: Int) throws
+    func deleteInventory(index: Int) throws
   }
   // 유저 모드에서 사용하는 로직
   protocol UserModeDelegate {
-    	func add(money: Int) throws
-      func buyDrink(index: Int) throws
+    func add(money: Int) throws
+    func buyDrink(index: Int) throws
   }
   // 자판기 주요 로직 구현
   class CoreVendingMachine: ManagerModeDelegate, UserModeDelegate {...}
@@ -99,29 +99,29 @@
 
   ~~~swift
   protocol EnableMode {
-      func makeMenu() -> MenuContents
-    	func action(action: Action) throws
+    func makeMenu() -> MenuContents
+    func action(action: Action) throws
   }
   ~~~
 
   ~~~swift
   // 매니저와 유저 구조체에서 makeMenu, action 수행을 CoreVendingMachine에게 위임한다.
   struct Manager: EnableMode {
-      var delegate: ManagerModeDelegate
-    	init(target: ManagerModeDelegate) {
-          delegate = target
-      }
-    	func makeMenu() -> MenuContents {...}
-    	func action(action: Action) throws {...}
+    var delegate: ManagerModeDelegate
+    init(target: ManagerModeDelegate) {
+      delegate = target
+    }
+    func makeMenu() -> MenuContents {...}
+    func action(action: Action) throws {...}
   }
 
   struct User: EnableMode {
-      var delegate: UserModeDelegate
-    	init(target: UserModeDelegate) {
-          delegate = target
-      }
-    	func makeMenu() -> MenuContents {...}
-    	func action(action: Action) throws {...}
+    var delegate: UserModeDelegate
+    init(target: UserModeDelegate) {
+      delegate = target
+    }
+    func makeMenu() -> MenuContents {...}
+    func action(action: Action) throws {...}
   }
   ~~~
 
@@ -133,18 +133,18 @@
 
     ~~~swift
     struct Action {
-        private var _option: Option
-        enum Option: Int {
-            case add = 1
-            case delete, exit
-        }
-        private var _detail: Int
-        var option: Option {
-            return _option
-        }
-        var detail: Int {
-            return _detail
-        }
+      private var _option: Option
+      enum Option: Int {
+        case add = 1
+        case delete, exit
+      }
+      private var _detail: Int
+      var option: Option {
+        return _option
+      }
+      var detail: Int {
+        return _detail
+      }
     }
     ~~~
 
@@ -154,8 +154,8 @@
 
   ~~~swift
   final class CoreVendingMachine {
-      private var inventory: [Drink: Count]
-      private var purchases: [Drink: Count]
+    private var inventory: [Drink: Count]
+    private var purchases: [Drink: Count]
   }
   ~~~
 
@@ -163,8 +163,8 @@
 
   ~~~swift
   final class CoreVendingMachine {
-      private var inventory: [Drink]
-      private var purchases: [Drink]
+    private var inventory: [Drink]
+    private var purchases: [Drink]
   }
   ~~~
 
